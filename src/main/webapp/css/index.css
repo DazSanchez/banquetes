@@ -1,0 +1,6 @@
+.mensaje-principal {
+    --url: url("https://banquetesconstanza.com/wp-content/uploads/2014/07/banquetes.jpg");
+    background: 
+        linear-gradient(to right, rgba(0,0,0,.75), rgba(0,0,0,0)),
+        var(--url) no-repeat center center / cover;
+}
