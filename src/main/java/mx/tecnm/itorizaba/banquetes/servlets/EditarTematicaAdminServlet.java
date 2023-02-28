@@ -8,11 +8,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Arrays;
-import mx.tecnm.itorizaba.banquetes.entidades.Banquete;
-import mx.tecnm.itorizaba.banquetes.entidades.Menu;
+import java.util.Map;
+import mx.tecnm.itorizaba.banquetes.entidades.Adorno;
+import mx.tecnm.itorizaba.banquetes.entidades.Color;
+import mx.tecnm.itorizaba.banquetes.entidades.Tematica;
 
-@WebServlet(name = "EditarBanqueteAdmin", urlPatterns = {"/panel-administrador/banquetes/editar"})
-public class EditarBanqueteAdmin extends HttpServlet {
+@WebServlet(name = "EditarTematicaAdmin", urlPatterns = {"/panel-administrador/tematicas/editar"})
+public class EditarTematicaAdminServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,27 +28,33 @@ public class EditarBanqueteAdmin extends HttpServlet {
             resp.sendRedirect(req.getContextPath());
             return;
         }
-
-        Menu[] menus = new Menu[]{};
-
-        Banquete banquete = new Banquete(1, 
-                "Banquete 1", 
+        
+        Color[] colores = new Color[]{};
+        Adorno[] adornos = new Adorno[]{};
+        
+        Tematica t = new Tematica(1, 
+                "Tematica 1", 
                 "Mensaje 1", 
-                "Mensaje 1 s", 
-                "Titulo", 
-                "Contenido", 
+                "Mensaje 2", 
+                "Titulo 1", 
+                "Descripcion", 
                 "icon", 
                 "url", 
-                Arrays.asList(menus));
+                Arrays.asList(colores), Arrays.asList(adornos));
         
-        req.setAttribute("banquete", banquete);
+        req.setAttribute("tematica", t);
 
-        req.getRequestDispatcher("/editar_banquete_admin.jsp").forward(req, resp);
+        req.getRequestDispatcher("/editar_tematica_admin.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        // Obtener los campos del cuerpo de la peticion
+        Map<String, String[]> cuerpoPeticion = req.getParameterMap();
+        
+        req.setAttribute("tieneExito", true);
+        
+        req.getRequestDispatcher("/editar_tematica_admin.jsp").forward(req, resp);
     }
 
 }
